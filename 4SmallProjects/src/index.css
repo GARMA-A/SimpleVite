@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+.navBtn
+{
+       @apply bg-slate-600  h-6 w-20 rounded-md duration-100 hover:bg-slate-300 font-semibold active:scale-95;
+}
+
+
+
+
