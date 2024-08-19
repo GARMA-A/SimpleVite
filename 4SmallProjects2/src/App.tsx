@@ -2,53 +2,35 @@
 
 // `https://api.frankfurter.app/latest?amount=100&from=EUR&to=USD`
 
-import { useEffect, useState } from "react";
+import { useState,useReducer } from "react";
 
+type State = { "count": number };
+type Action = { "type": "increment"|"decrement" };
 
+function reducer(state: State, action: Action) {
+  switch (action.type) {
+    case "increment":
+      return { "count": state.count + 1 };
+    case "decrement":
+      return { "count": state.count - 1 };
+    default:
+      return state;
+  }
+}
 
 function App() {
-  const [amount, setAmount] = useState<number>(0);
-  const [fromCurrency, setFromCurrency] = useState<string>("USD");
-  const [toCurrency, setToCurrency] = useState<string>("INR");
-  const [result, setResult] = useState<number>(0);
-  
 
-  useEffect(() => {
-    async function fetchCurrency() {
-      const res = await fetch(`https://api.frankfurter.app/latest?amount=${amount}&from=${fromCurrency}&to=${toCurrency}`);
-      const data = await res.json();
-      setResult(data.rates[toCurrency]);
+  const [state, dispatch] = useReducer(reducer, { "count": 0 });
 
-    }
-    fetchCurrency();
-    return () => { setResult(0) }; 
-
-
-   }, [amount, fromCurrency, toCurrency]);
-
- 
   return (
     <div>
-      <input
-        type="text"
-        className="bg-slate-600 outline-none bottom-0 rounded-xl text-center"
-        onChange={(e) => setAmount(Number(e.target.value))}
-      />
-      <select onChange={(e) => setFromCurrency(e.target.value)}>
-        <option value="USD">USD</option>
-        <option value="EUR">EUR</option>
-        <option value="CAD">CAD</option>
-        <option value="INR">INR</option>
-      </select>
-      <select onChange={(e) => setToCurrency(e.target.value)}>
-        <option value="USD">USD</option>
-        <option value="EUR">EUR</option>
-        <option value="CAD">CAD</option>
-        <option value="INR">INR</option>
-      </select>
-      <p>{result||"OUTPUT"}</p>
+      <h1>{state.count}</h1>
+      <button onClick={() => dispatch({ "type": "increment" })}>+</button>
+      <button onClick={() => dispatch({ "type": "decrement" })}>-</button>
     </div>
   );
+  
+  
 }
 
 
