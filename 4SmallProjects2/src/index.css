@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: sans-serif;
+}
+
+.box {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 7px;
+  background-color: #f7f7f7;
+}
+
+.cls
+{
+  background-color: #ccc;
+}
+
+.navBtn
+{
+       @apply bg-slate-600  h-6 w-20 rounded-md duration-100 hover:bg-slate-300 font-semibold active:scale-95;
+}
+
+
+
+
