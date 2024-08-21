@@ -1,77 +1,49 @@
+import { useReducer } from "react";
 
+type Action = { type: string };
+type State = {count: number};
 
-// `https://api.frankfurter.app/latest?amount=100&from=EUR&to=USD`
-
-import { useState,useReducer } from "react";
-
-type State = { "count": number };
-type Action = { "type": "increment"|"decrement" };
-
-function reducer(state: State, action: Action) {
+function reducer(state: State, action: Action):State {
   switch (action.type) {
-    case "increment":
-      return { "count": state.count + 1 };
-    case "decrement":
-      return { "count": state.count - 1 };
+    case "inc":
+      return {count:state.count + 1};
+    case "dec":
+      return { count: state.count - 1 };
     default:
-      return state;
+      throw new Error("Unexpected action");
   }
 }
 
-function App() {
+const App = () => {
 
-  const [state, dispatch] = useReducer(reducer, { "count": 0 });
-
-  return (
-    <div>
-      <h1>{state.count}</h1>
-      <button onClick={() => dispatch({ "type": "increment" })}>+</button>
-      <button onClick={() => dispatch({ "type": "decrement" })}>-</button>
-    </div>
-  );
-  
-  
-}
-
-
-type TextExpanderProps = {
-  children: string;
-  collapsedNumWords?: number;
-  expandButtonText?: string;
-  collapseButtonText?: string;
-  buttonColor?: string;
-  expanded?: boolean;
-  className?: string;
-}; 
-
-
-
-function TextExpander({
-  children,
-  collapsedNumWords=10,
-  expanded=false,
-  collapseButtonText = "Read More",
-  expandButtonText = "Read Less",
-  buttonColor = "#0000ff",
-  className=""
-}: TextExpanderProps): JSX.Element {
-
-  const [activeExpanded, setActiveExpanded] = useState<boolean>(expanded);
-  const content = children.split(" ").slice(0, collapsedNumWords).join(" ");
+  const [{count} , dispatch] = useReducer(reducer, {count: 0});
 
 
   return (
-    <div className={`box ${className}`}>
-      <p>{activeExpanded ? content : children}</p>
-      <button  style={{ color: buttonColor }}
-        onClick={() => setActiveExpanded((prev) => !prev)}
-      >
-        {activeExpanded && expandButtonText}
-        {!activeExpanded && collapseButtonText}
-      </button>
+    <div className="bg-zinc-800 min-w-screen min-h-screen text-white">
+      <div className="flex min-w-screen justify-center pt-8">
+        <button
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          onClick={() => dispatch({ type: "dec" })}
+        >
+          -
+        </button>
+        {/**************** */}
+        <h1 className="text-3xl ">counter</h1>
+        {/**************** */}
+        <button
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          onClick={() => dispatch({ type: "inc" })}
+        >
+          +
+        </button>
+      </div>
+      {/**************** */}
+      <h1 className="text-3xl flex min-w-screen justify-center mt-8">
+        {count}
+      </h1>
     </div>
   );
-}
+};
 
-
-export default App;
+export default App; 
