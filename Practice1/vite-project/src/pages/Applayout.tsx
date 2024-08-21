@@ -1,10 +1,17 @@
+
+import { Outlet, useParams } from "react-router-dom";
 import Sidebar from "../components/Sidebar"
-import styles from '../Style/AppLayout.module.css'
+
+import styles from "../Style/Homepage.module.css";
 
 function Applayout() {
+       const pageId = useParams();
+       console.log(pageId);
        return (
-              <div className={styles.app}>
-                     <Sidebar/>
+              <div className={styles.homepage}>
+                     <Sidebar />
+                     <Outlet />
+                     
               </div>
        )
 }

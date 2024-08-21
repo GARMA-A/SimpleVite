@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+
+.btn
+{
+  @apply p-8 bg-neutral-400 text-slate-800 hover:text-slate-300  hover:bg-slate-700 rounded-lg active:scale-95
+}
+
 /* Taken from getting started guide at: https://leafletjs.com/examples/quick-start/ */
 @import "https://unpkg.com/leaflet@1.7.1/dist/leaflet.css";
 @import "https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap";
