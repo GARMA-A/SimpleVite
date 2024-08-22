@@ -1,0 +1,18 @@
+       @tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+.btn
+{
+       @apply p-6 rounded-lg m-4 bg-slate-700 hover:bg-slate-400 hover:text-slate-950 text-slate-200 text-xl active:scale-95;
+}
+.textContainer
+{
+       @apply text-xl bg-slate-500 rounded-lg m-8 p-4 text-black;
+}
+
+
+
+
